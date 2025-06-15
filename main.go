@@ -8,8 +8,20 @@ import (
 	"strings"
 )
 
+type cliCommand struct {
+	name        string
+	description string
+	callback    func() error
+}
+
 func cleanInput(text string) []string {
 	return strings.Fields(text)
+}
+
+func commandExit() error {
+	fmt.Println("Closing the Pokedex... )
+	os.Exit(0)
+	return nil
 }
 
 func main() {
