@@ -3,26 +3,12 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/Vorex075/pokedexCLI/internal/commands"
+	"github.com/Vorex075/pokedexCLI/internal/parsing"
 	"log"
 	"os"
 	"strings"
 )
-
-type cliCommand struct {
-	name        string
-	description string
-	callback    func() error
-}
-
-func cleanInput(text string) []string {
-	return strings.Fields(text)
-}
-
-func commandExit() error {
-	fmt.Println("Closing the Pokedex... )
-	os.Exit(0)
-	return nil
-}
 
 func main() {
 	lineReader := bufio.NewScanner(os.Stdin)
@@ -32,10 +18,19 @@ func main() {
 			log.Fatal("error in scan")
 		}
 		allText := lineReader.Text()
-		separatedWords := cleanInput(allText)
+		separatedWords := parsing.CleanInput(allText)
 		if len(separatedWords) == 0 {
 			continue
 		}
-		fmt.Printf("Your command was: %s\n", strings.ToLower(separatedWords[0]))
+		command, ok := commands.AllowedCommands[separatedWords[0]]
+		if ok {
+			if err := command.Callback(); err != nil {
+				fmt.Printf("error while trying to execute %s command: %v",
+					separatedWords[0], err)
+				return
+			}
+		} else {
+			fmt.Printf("Your command was: %s\n", strings.ToLower(separatedWords[0]))
+		}
 	}
 }
