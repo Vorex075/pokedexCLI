@@ -12,13 +12,13 @@ type LocationResponse struct {
 	LocationList []struct {
 		Name string `json:"name"`
 		Url  string `json:"url"`
-	}
+	} `json:"results"`
 }
 
 func (c *Client) FetchLocations(endpoint *string) (LocationResponse, error) {
-	url := base_url
+	url := base_url + "/location-area"
 	if endpoint != nil {
-		url = url + *endpoint
+		url = *endpoint
 	}
 
 	req, err := http.NewRequest("GET", url, nil)
