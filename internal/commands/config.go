@@ -9,3 +9,9 @@ type Config struct {
 	next          *string
 	prev          *string
 }
+
+func NewConfig(client api.Client) Config {
+	return Config{
+		pokeapiClient: client,
+	}
+}

@@ -1,6 +1,6 @@
 package commands
 
-func getCommands() map[string]CliCommand {
+func GetCommands() map[string]CliCommand {
 	return map[string]CliCommand{
 		"exit": {
 			Name:        "exit",
@@ -11,6 +11,11 @@ func getCommands() map[string]CliCommand {
 			Name:        "Help",
 			Description: "Displays a help message",
 			Callback:    commandHelp,
+		},
+		"map": {
+			Name:        "Map",
+			Description: "Get the next page of locations",
+			Callback:    commandMap,
 		},
 	}
 }
