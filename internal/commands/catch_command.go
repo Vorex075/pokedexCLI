@@ -36,7 +36,6 @@ func CommandCatch(cfg *Config, args []string) error {
 	}
 	fmt.Printf("Throwing a Pokeball at %s...\n", pokemonName)
 	isCatch := int(math.Log2(float64(data.BaseExperience))) % ((rand.Int() % 5) + 1)
-	fmt.Printf("Is catch: %v\n", isCatch)
 	if !(isCatch <= 3) {
 		fmt.Printf("%s escaped!\n", pokemonName)
 		return nil
