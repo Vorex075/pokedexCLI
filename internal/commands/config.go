@@ -10,11 +10,13 @@ type Config struct {
 	cache         *pokecache.Cache
 	next          *string
 	prev          *string
+	pokedex       map[string]Pokemon
 }
 
 func NewConfig(client api.Client, cache *pokecache.Cache) Config {
 	return Config{
 		pokeapiClient: client,
 		cache:         cache,
+		pokedex:       make(map[string]Pokemon),
 	}
 }

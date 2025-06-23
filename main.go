@@ -32,7 +32,7 @@ func main() {
 		args := commandAndArgs[1:]
 		if ok {
 			if err := command.Callback(&cfg, args); err != nil {
-				fmt.Printf("error while trying to execute %s command: %v",
+				fmt.Printf("error while trying to execute %s command: %v\n",
 					commandAndArgs[0], err)
 				continue
 			}
