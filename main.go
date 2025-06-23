@@ -22,20 +22,21 @@ func main() {
 			log.Fatal("error in scan")
 		}
 		allText := lineReader.Text()
-		separatedWords := parsing.CleanInput(allText)
-		if len(separatedWords) == 0 {
+		commandAndArgs := parsing.CleanInput(allText)
+		if len(commandAndArgs) == 0 {
 			continue
 		}
 		allowedCommands := commands.GetCommands()
-		command, ok := allowedCommands[separatedWords[0]]
+		command, ok := allowedCommands[commandAndArgs[0]]
+		args := commandAndArgs[1:]
 		if ok {
-			if err := command.Callback(&cfg); err != nil {
+			if err := command.Callback(&cfg, args); err != nil {
 				fmt.Printf("error while trying to execute %s command: %v",
-					separatedWords[0], err)
-				return
+					commandAndArgs[0], err)
+				continue
 			}
 		} else {
-			fmt.Printf("Your command was: %s\n", strings.ToLower(separatedWords[0]))
+			fmt.Printf("Your command was: %s\n", strings.ToLower(commandAndArgs[0]))
 		}
 	}
 }
