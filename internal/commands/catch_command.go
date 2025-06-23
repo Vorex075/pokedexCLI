@@ -41,6 +41,7 @@ func CommandCatch(cfg *Config, args []string) error {
 		return nil
 	}
 	fmt.Printf("%s was caught!\n", pokemonName)
+	fmt.Println("You may now inspect it with the inspect command..")
 	newCatch := Pokemon{
 		info:      data,
 		catchTime: time.Now(),
