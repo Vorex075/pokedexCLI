@@ -10,6 +10,19 @@ type PokemonInfo struct {
 	Name           string `json:"name"`
 	Id             int    `json:"id"`
 	BaseExperience int    `json:"base_experience"`
+	Types          []struct {
+		Type struct {
+			Name string `json:"name"`
+		} `json:"type"`
+	} `json:"types"`
+	Stats []struct {
+		BaseValue int `json:"base_stat"`
+		Stat      struct {
+			Name string `json:"name"`
+		} `json:"stat"`
+	} `json:"stats"`
+	Weight int `json:"weight"`
+	Height int `json:"height"`
 }
 
 func (c *Client) FetchPokemonInfo(pokemonName string) (PokemonInfo, error) {
