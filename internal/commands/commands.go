@@ -8,14 +8,19 @@ func GetCommands() map[string]CliCommand {
 			Callback:    commandExit,
 		},
 		"help": {
-			Name:        "Help",
+			Name:        "help",
 			Description: "Displays a help message",
 			Callback:    commandHelp,
 		},
 		"map": {
-			Name:        "Map",
+			Name:        "map",
 			Description: "Get the next page of locations",
 			Callback:    commandMap,
+		},
+		"mapb": {
+			Name:        "mapb",
+			Description: "Get the previous page of locations",
+			Callback:    commandMapb,
 		},
 	}
 }

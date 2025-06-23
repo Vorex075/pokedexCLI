@@ -18,3 +18,22 @@ func commandMap(cfg *Config) error {
 	}
 	return nil
 }
+
+func commandMapb(cfg *Config) error {
+	if cfg.prev == nil {
+		fmt.Println("you are on the first page")
+		return nil
+	}
+	locationResp, err := cfg.pokeapiClient.FetchLocations(cfg.prev)
+	if err != nil {
+		return err
+	}
+
+	cfg.next = locationResp.Next
+	cfg.prev = locationResp.Previous
+
+	for _, loc := range locationResp.LocationList {
+		fmt.Println(loc.Name)
+	}
+	return nil
+}
