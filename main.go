@@ -11,11 +11,12 @@ import (
 	"github.com/Vorex075/pokedexCLI/internal/api"
 	"github.com/Vorex075/pokedexCLI/internal/commands"
 	"github.com/Vorex075/pokedexCLI/internal/parsing"
+	"github.com/Vorex075/pokedexCLI/internal/pokecache"
 )
 
 func main() {
 	lineReader := bufio.NewScanner(os.Stdin)
-	cfg := commands.NewConfig(api.NewClient(5 * time.Second))
+	cfg := commands.NewConfig(api.NewClient(5*time.Second), pokecache.NewCache(5*time.Second))
 	for {
 		fmt.Print("Pokedex > ")
 		if !lineReader.Scan() {
